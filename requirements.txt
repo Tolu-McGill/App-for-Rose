@@ -2,4 +2,4 @@ gunicorn==23.0.0
 packaging==24.1
 pillow==10.2.0
 Flask==2.3.2
-google-cloud-vision==3.0.2
+google-cloud-vision==3.7.4
