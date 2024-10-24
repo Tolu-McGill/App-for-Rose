@@ -6,6 +6,7 @@ import sqlite3
 import hashlib
 from datetime import datetime
 import json
+import tempfile
 
 # Get the Google Cloud credentials JSON from the Heroku environment variable
 credentials_json = os.getenv('GOOGLE_APPLICATION_CREDENTIALS_JSON')  # This assumes you set it as 'GOOGLE_APPLICATION_CREDENTIALS_JSON'
