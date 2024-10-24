@@ -47,6 +47,25 @@ header h1 {
     margin-top: 10px;
 }
 
+.monthly-report-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.report-button {
+    background-color: #ff6347; /* A modern chic color */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.report-button:hover {
+    background-color: #ff8566; /* Lighter shade on hover */
+}
+
 footer {
     position: absolute;
     bottom: 10px;
