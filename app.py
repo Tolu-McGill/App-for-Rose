@@ -8,7 +8,7 @@ from datetime import datetime
 import json
 
 # Get the Google Cloud credentials JSON from the Heroku environment variable
-credentials_json = os.getenv('GOOGLE_APPLICATION_CREDENTIALS_JSON')
+credentials_json = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 
 # Write the credentials to a temporary file in the Heroku environment
 credentials_path = '/tmp/google_credentials.json'
