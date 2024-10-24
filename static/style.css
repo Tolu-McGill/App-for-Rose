@@ -1,59 +1,100 @@
+/* Global Styles */
 body {
-    font-family: 'Helvetica Neue', sans-serif;
-    background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    color: #333;
 }
 
-header h1 {
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px #ccc;
-}
-
-.upload-section {
-    background: rgba(255, 255, 255, 0.8);
+/* Header Section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     padding: 20px;
+    background-color: #f8f8f8;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+}
+
+.app-title h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    color: #333;
+    margin: 0;
+}
+
+.app-title p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: #777;
+    margin: 0;
+}
+
+/* Upload Section */
+.upload-section {
+    background-color: #fff;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    margin-top: 40px;
 }
 
 .upload-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.upload-label {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
     color: #333;
 }
 
 .upload-section input[type="file"] {
     padding: 10px;
-    border: none;
-    background: #f7f7f7;
-    margin-top: 10px;
-    border-radius: 5px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 80%;
+    margin-bottom: 20px;
 }
 
-.upload-section button {
+.upload-btn {
+    background-color: #00bfa5;
+    color: white;
     padding: 10px 20px;
-    background: #8e44ad;
-    color: #fff;
+    border-radius: 8px;
+    font-size: 18px;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
 
+.upload-btn:hover {
+    background-color: #00d4b0;
+}
+
+/* Monthly Report Section */
 .monthly-report-section {
     text-align: center;
     margin-top: 20px;
 }
 
 .report-button {
-    background-color: #ff6347; /* A modern chic color */
+    background-color: #ff6347;
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
@@ -63,11 +104,21 @@ header h1 {
 }
 
 .report-button:hover {
-    background-color: #ff8566; /* Lighter shade on hover */
+    background-color: #ff8566;
 }
 
+/* Footer Section */
 footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
     position: absolute;
-    bottom: 10px;
-    color: white;
+    bottom: 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
 }
