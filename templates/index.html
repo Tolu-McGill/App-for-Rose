@@ -3,13 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Receipt</title>
+    <title>UlomaApp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Upload a Receipt</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="receipt" accept="image/*" capture="camera">
-        <button type="submit">Upload</button>
-    </form>
+    <header>
+        <h1>Welcome to UlomaApp</h1>
+    </header>
+    
+    <div class="upload-section">
+        <h2>Upload Your Receipt</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="receipt" accept="image/*" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>Designed for Uloma with ❤️</p>
+    </footer>
 </body>
 </html>

@@ -1,0 +1,54 @@
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px #ccc;
+}
+
+.upload-section {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.upload-section h2 {
+    color: #333;
+}
+
+.upload-section input[type="file"] {
+    padding: 10px;
+    border: none;
+    background: #f7f7f7;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.upload-section button {
+    padding: 10px 20px;
+    background: #8e44ad;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    color: white;
+}
