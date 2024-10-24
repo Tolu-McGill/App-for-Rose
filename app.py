@@ -184,8 +184,7 @@ def extract_total(text):
 def report():
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('SELECT SUM(amount) FROM expenses WHERE TO_CHAR(date::date, %s) = %s', 
-                   ('YYYY-MM', datetime.now().strftime('%Y-%m')))
+    cursor.execute('SELECT SUM(amount) FROM expenses WHERE date_trunc(\'month\', date::date) = date_trunc(\'month\', CURRENT_DATE)')
     total = cursor.fetchone()[0]
     cursor.close()
     conn.close()
