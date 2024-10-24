@@ -10,13 +10,10 @@ import json
 # Get the Google Cloud credentials JSON from the Heroku environment variable
 credentials_json = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 
-# Write the credentials to a temporary file in the Heroku environment
-credentials_path = '/tmp/google_credentials.json'
-with open(credentials_path, 'w') as f:
-    f.write(credentials_json)
+if not credentials_json:
+    # Handle the case where the environment variable is not set
+    raise ValueError("GOOGLE_APPLICATION_CREDENTIALS environment variable not found")
 
-# Set the environment variable to point to the credentials file
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
 
 # Initialize the Vision API client
 client = vision.ImageAnnotatorClient()
