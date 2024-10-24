@@ -5,17 +5,23 @@ import re
 import sqlite3
 import hashlib
 from datetime import datetime
-import base64
+import json
+
+# Get the Google Cloud credentials JSON from the Heroku environment variable
+credentials_json = os.getenv('GOOGLE_APPLICATION_CREDENTIALS_JSON')
+
+# Write the credentials to a temporary file in the Heroku environment
+credentials_path = '/tmp/google_credentials.json'
+with open(credentials_path, 'w') as f:
+    f.write(credentials_json)
+
+# Set the environment variable to point to the credentials file
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
+
+# Initialize the Vision API client
+client = vision.ImageAnnotatorClient()
 
 app = Flask(__name__)
-
-# Setup Google Cloud Vision
-# IMPORTANT: You need to ensure that the GOOGLE_APPLICATION_CREDENTIALS file is available on Heroku
-# You can't use a local path like C:\Users\dudeo\... on Heroku
-# It's best to upload the credentials to an environment variable in Heroku's settings
-# For now, remove the hardcoded path
-# os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"C:\Users\dudeo\Downloads\Python Project for Rose\bright-drake-439601-i4-bd1026251962.json"
-client = vision.ImageAnnotatorClient()
 
 # Get the directory where app.py is located
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -57,7 +63,6 @@ def compute_file_hash(file_path):
         for byte_block in iter(lambda: f.read(4096), b""):
             sha256_hash.update(byte_block)
     return sha256_hash.hexdigest()
-
 
 @app.route('/')
 def index():
@@ -155,7 +160,6 @@ def report():
     conn.close()
 
     return f'Total spent this month: ${total:.2f}' if total else "No expenses recorded for this month."
-
 
 if __name__ == '__main__':
     init_db()
