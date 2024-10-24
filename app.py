@@ -8,11 +8,19 @@ from datetime import datetime
 import json
 
 # Get the Google Cloud credentials JSON from the Heroku environment variable
-credentials_json = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+credentials_json = os.getenv('GOOGLE_APPLICATION_CREDENTIALS_JSON')  # This assumes you set it as 'GOOGLE_APPLICATION_CREDENTIALS_JSON'
 
 if not credentials_json:
-    # Handle the case where the environment variable is not set
-    raise ValueError("GOOGLE_APPLICATION_CREDENTIALS environment variable not found")
+    raise ValueError("GOOGLE_APPLICATION_CREDENTIALS_JSON environment variable not found")
+
+# Write the credentials JSON to a temporary file
+with tempfile.NamedTemporaryFile(delete=False, mode='w', suffix='.json') as temp_file:
+    temp_file.write(credentials_json)
+    temp_credentials_path = temp_file.name
+
+# Set the environment variable GOOGLE_APPLICATION_CREDENTIALS to point to this temp file
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = temp_credentials_path
+
 
 
 # Initialize the Vision API client
