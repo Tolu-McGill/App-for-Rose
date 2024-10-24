@@ -4,26 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UlomaApp</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="/static/uloma_app_logo.png" alt="Ulomaapp Logo">
-        </div>
-        <div class="app-title">
-            <h1>UlomaApp</h1>
-            <p>Track your expenses effortlessly</p>
+        <div class="header-container">
+            <img src="{{ url_for('static', filename='uloma_logo.png') }}" alt="UlomaApp Logo" class="logo">
+            <div class="header-text">
+                <h1>UlomaApp</h1>
+                <p>Track your expenses effortlessly</p>
+            </div>
         </div>
     </header>
     
     <div class="upload-section">
         <h2>Upload Your Receipt</h2>
         <form action="/upload" method="post" enctype="multipart/form-data">
-            <label for="receipt" class="upload-label">Choose a receipt image</label>
-            <input type="file" id="receipt" name="receipt" accept="image/*" required>
-            <button type="submit" class="upload-btn">Upload</button>
+            <input type="file" name="receipt" accept="image/*" required>
+            <button type="submit">Upload</button>
         </form>
     </div>
 
