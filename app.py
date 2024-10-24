@@ -5,6 +5,7 @@ import re
 import sqlite3
 import hashlib
 from datetime import datetime
+import base64
 
 app = Flask(__name__)
 
