@@ -106,3 +106,38 @@ footer {
     color: #333;
     font-size: 14px;
 }
+
+.report-section {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 50px;
+}
+
+.report-section h2 {
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.report-total {
+    font-size: 2.5rem;
+    color: #8e44ad;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.report-section a {
+    background-color: #ff6347; /* A modern chic color */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.report-section a:hover {
+    background-color: #ff8566; /* Lighter shade on hover */
+}

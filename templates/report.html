@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UlomaApp - Monthly Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Monthly Expense Report</h1>
+    </header>
+    
+    <div class="report-section">
+        <h2>Here is your total spending for the month:</h2>
+        <p class="report-total">{{ report }}</p>
+        <a href="/" class="btn btn-primary">Go Back to Home</a>
+    </div>
+
+    <footer>
+        <p>UlomaApp © 2024 | Built with ❤️ for Uloma</p>
+    </footer>
+</body>
+</html>

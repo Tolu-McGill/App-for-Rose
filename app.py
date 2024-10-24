@@ -180,7 +180,6 @@ def extract_total(text):
 
 # Route to show monthly report of total expenses
 @app.route('/report')
-
 def report():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -189,7 +188,10 @@ def report():
     cursor.close()
     conn.close()
 
-    return f'Total spent this month: ${total:.2f}' if total else "No expenses recorded for this month."
+    # If total is None, set it to 0.00 for display purposes
+    report = f'Total spent this month: ${total:.2f}' if total else "No expenses recorded for this month."
+
+    return render_template('report.html', report=report)
 
 if __name__ == '__main__':
     init_db()
