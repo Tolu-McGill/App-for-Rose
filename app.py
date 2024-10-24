@@ -2,7 +2,8 @@ from flask import Flask, request, render_template, redirect, url_for
 from google.cloud import vision
 import os
 import re
-import sqlite3
+import psycopg2
+from urllib.parse import urlparse
 import hashlib
 from datetime import datetime
 import json
@@ -33,32 +34,53 @@ app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Full path to the database file
-DB_PATH = os.path.join(BASE_DIR, 'expenses.db')
+# DB_PATH = os.path.join(BASE_DIR, 'expenses.db')
+
+# Initialize PostgreSQL connection
+def get_db_connection():
+    # Get the DATABASE_URL environment variable from Heroku
+    database_url = os.environ.get('DATABASE_URL')
+    
+    # Parse the database URL
+    result = urlparse(database_url)
+
+    # Connect to PostgreSQL
+    conn = psycopg2.connect(
+        dbname=result.path[1:],  # Remove the leading '/' from the path
+        user=result.username,
+        password=result.password,
+        host=result.hostname,
+        port=result.port
+    )
+    return conn
+
 
 # Initialize the database (create tables if they don't exist)
 def init_db():
-    print("Initializing the database...")  # Debugging statement
-    conn = sqlite3.connect(DB_PATH)
+    print("Initializing the PostgreSQL database...")
+    conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS expenses (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             date TEXT,
             amount REAL,
             file_hash TEXT
         )
     ''')
     conn.commit()
+    cursor.close()
     conn.close()
-    print("Database initialized successfully.")  # Debugging statement
+    print("PostgreSQL database initialized successfully.")
 
 # Function to store the extracted total and hash in the database
 def store_total_in_db(total_amount, file_hash):
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO expenses (date, amount, file_hash) VALUES (?, ?, ?)', 
+    cursor.execute('INSERT INTO expenses (date, amount, file_hash) VALUES (%s, %s, %s)', 
                    (datetime.now().strftime('%Y-%m-%d'), total_amount, file_hash))
     conn.commit()
+    cursor.close()
     conn.close()
 
 # Function to compute the SHA256 hash of the uploaded file
@@ -95,10 +117,11 @@ def upload_receipt():
     file_hash = compute_file_hash(filepath)
 
     # Check if the file hash already exists in the database
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('SELECT COUNT(*) FROM expenses WHERE file_hash = ?', (file_hash,))
+    cursor.execute('SELECT COUNT(*) FROM expenses WHERE file_hash = %s', (file_hash,))
     result = cursor.fetchone()[0]
+    cursor.close()
     conn.close()
 
     if result > 0:
@@ -157,12 +180,14 @@ def extract_total(text):
 
 # Route to show monthly report of total expenses
 @app.route('/report')
+
 def report():
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('SELECT SUM(amount) FROM expenses WHERE strftime("%Y-%m", date) = ?', 
-                   (datetime.now().strftime('%Y-%m'),))
+    cursor.execute('SELECT SUM(amount) FROM expenses WHERE TO_CHAR(date::date, %s) = %s', 
+                   ('YYYY-MM', datetime.now().strftime('%Y-%m')))
     total = cursor.fetchone()[0]
+    cursor.close()
     conn.close()
 
     return f'Total spent this month: ${total:.2f}' if total else "No expenses recorded for this month."
