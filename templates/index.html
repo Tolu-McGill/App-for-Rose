@@ -8,19 +8,15 @@
 </head>
 <body>
     <header>
-        <div class="header-container">
-            <img src="{{ url_for('static', filename='uloma_app_logo.png') }}" alt="UlomaApp Logo" class="logo">
-            <div class="header-text">
-                <h1>UlomaApp</h1>
-                <p>Track your expenses effortlessly</p>
-            </div>
-        </div>
+        <h1>Welcome to UlomaApp</h1>
     </header>
     
     <div class="upload-section">
         <h2>Upload Your Receipt</h2>
+        <!-- Updated form -->
         <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="receipt" accept="image/*" required>
+            <!-- Use the 'capture' attribute to open the camera on mobile devices -->
+            <input type="file" name="receipt" accept="image/*" capture="camera" required>
             <button type="submit">Upload</button>
         </form>
     </div>
@@ -30,7 +26,7 @@
     </div>
 
     <footer>
-        <p>UlomaApp © 2024 | Built with ❤️ for Uloma</p>
+        <p>Designed for Uloma with ❤️</p>
     </footer>
 </body>
 </html>

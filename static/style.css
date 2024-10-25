@@ -5,55 +5,28 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* Make sure the body takes the full height of the viewport */
 }
 
-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 40px;
-}
-
-.header-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.logo {
-    width: 100px;
-    height: auto;
-    border-radius: 10px;
-}
-
-.header-text h1 {
+header h1 {
     font-size: 2.5rem;
-    color: #333;
-    margin: 0;
+    color: #fff;
+    margin-bottom: 20px;
     text-shadow: 2px 2px #ccc;
 }
 
-.header-text p {
-    color: #666;
-    font-size: 1.2rem;
-    margin-top: 5px;
-}
-
 .upload-section {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
 .upload-section h2 {
     color: #333;
-    margin-bottom: 15px;
 }
 
 .upload-section input[type="file"] {
@@ -62,73 +35,24 @@ header {
     background: #f7f7f7;
     margin-top: 10px;
     border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .upload-section button {
     padding: 10px 20px;
-    background: #28a745;
+    background: #8e44ad;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-}
-
-.upload-section button:hover {
-    background-color: #218838;
+    margin-top: 10px;
 }
 
 .monthly-report-section {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .report-button {
-    background-color: #ff6347;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-}
-
-.report-button:hover {
-    background-color: #ff8566;
-}
-
-footer {
-    position: absolute;
-    bottom: 10px;
-    color: #333;
-    font-size: 14px;
-}
-
-.report-section {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-top: 50px;
-}
-
-.report-section h2 {
-    color: #333;
-    font-size: 1.5rem;
-}
-
-.report-total {
-    font-size: 2.5rem;
-    color: #8e44ad;
-    margin: 20px 0;
-    font-weight: bold;
-}
-
-.report-section a {
     background-color: #ff6347; /* A modern chic color */
     color: white;
     padding: 10px 20px;
@@ -138,6 +62,13 @@ footer {
     transition: background-color 0.3s ease;
 }
 
-.report-section a:hover {
+.report-button:hover {
     background-color: #ff8566; /* Lighter shade on hover */
+}
+
+footer {
+    color: white;
+    margin-top: 40px; /* Adjust this value to increase space */
+    padding-bottom: 20px; /* Adds some padding to ensure it's not too close to the screen edge */
+    text-align: center;
 }
