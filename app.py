@@ -152,7 +152,9 @@ def upload_receipt():
 
 def extract_total(text):
     """
-    Extracts the total amount from a receipt by finding the last occurrence of 'total' and getting the number from the next line.
+    Extracts the total amount from a receipt by finding the last occurrence of 'total' 
+    and getting the number from the next line. Supports both comma as a decimal point 
+    (French style) and comma as a thousand separator (English style).
     """
     # Convert the text to lowercase for consistent matching
     text_lower = text.lower()
@@ -160,8 +162,9 @@ def extract_total(text):
     # Split the text into lines
     lines = text_lower.split('\n')
 
-    # Regular expression to detect numeric values (numbers with decimal points)
-    money_pattern = re.compile(r'\d+[.,]?\d{2}')
+    # Regular expression to detect amounts, allowing comma or period as separators
+    # Handles numbers like 1,000.50 (English) and 1000,50 (French)
+    money_pattern = re.compile(r'\b\d{1,3}(?:,\d{3})*(?:[.,]\d{2})?\b')
 
     total_amount = None
 
@@ -173,10 +176,18 @@ def extract_total(text):
                 next_line = lines[i + 1]
                 match = money_pattern.search(next_line)
                 if match:
-                    total_amount = match.group().replace(',', '')  # Remove commas if any
+                    matched_value = match.group()
+                    
+                    # Handle English style: 1,000.50 or 1000.50
+                    if '.' in matched_value:
+                        total_amount = matched_value.replace(',', '')  # Remove thousands commas if any
 
-    # Return the last total amount found
+                    # Handle French style: 1000,50
+                    elif ',' in matched_value:
+                        total_amount = matched_value.replace(',', '.')  # Treat comma as decimal
+
     return total_amount if total_amount else "Total amount not found"
+
 
 # Route to show monthly report of total expenses
 @app.route('/report')
