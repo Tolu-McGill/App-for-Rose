@@ -190,7 +190,7 @@ def upload_receipt():
 def extract_total(text):
     """
     Extracts the total amount by identifying the amount next to specific keywords like 'Total' or 'À PAYER'.
-    If no keyword is found, it defaults to selecting the largest monetary amount detected.
+    If no keyword is found, it defaults to selecting the largest reasonable monetary amount detected.
     """
     # Clean up the OCR text to improve matching
     cleaned_text = re.sub(r'[^0-9a-zA-Z.,\s]', '', text)  # Remove unexpected symbols
@@ -202,7 +202,7 @@ def extract_total(text):
     # Define keywords to identify total amounts
     total_keywords = [r"total", r"à payer", r"amount due", r"montant", r"amount"]
     
-    # Regex pattern to detect monetary values following keywords, with improved flexibility
+    # Regex pattern to detect reasonable monetary values following keywords
     total_pattern = re.compile(
         r"(?:{}).*?(\d{{1,3}}(?:[.,\s]?\d{{3}})*(?:[.,\s]?\d{{2}}))".format("|".join(total_keywords)), 
         re.IGNORECASE
@@ -219,20 +219,23 @@ def extract_total(text):
         except ValueError:
             return "Total amount not found"
 
-    # Fallback: If no keyword match, detect all monetary values and select the largest
-    money_pattern = re.compile(r'\b\d{1,3}(?:[.,\s]?\d{3})*(?:[.,\s]?\d{2})\b')
+    # Fallback: If no keyword match, detect all reasonable monetary values and select the largest
+    money_pattern = re.compile(r'\b\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})\b')
     amounts = money_pattern.findall(text_lower)
 
+    # Filter out unreasonable amounts that might be IDs or other large numbers
     numeric_amounts = []
     for amount in amounts:
         normalized_amount = amount.replace(' ', '').replace(',', '.')  # Handle spacing and commas
         try:
             numeric_amount = float(normalized_amount)
-            numeric_amounts.append(numeric_amount)
+            # Only consider amounts less than a certain threshold, e.g., 10,000
+            if 0 < numeric_amount < 10000:
+                numeric_amounts.append(numeric_amount)
         except ValueError:
             continue
 
-    # Return the largest amount if no keyword-based total found
+    # Return the largest reasonable amount if no keyword-based total found
     return max(numeric_amounts) if numeric_amounts else "Total amount not found"
 
 
