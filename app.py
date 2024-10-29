@@ -150,11 +150,14 @@ def upload_receipt():
     os.remove(filepath)
 
     return f'Total amount: {total_amount}'
+
+import re
+
 def extract_total(text):
     """
-    Extracts the total amount from a receipt by finding the last occurrence of 'total' 
-    and getting the number from the next line. Supports both comma as a decimal point 
-    (French style) and comma as a thousand separator (English style).
+    Extracts the total amount from a receipt by finding occurrences of 'total' and 'sous-total',
+    then looking for numeric values on the same or next line. Supports both commas and periods as
+    decimal separators.
     """
     # Convert the text to lowercase for consistent matching
     text_lower = text.lower()
@@ -162,30 +165,29 @@ def extract_total(text):
     # Split the text into lines
     lines = text_lower.split('\n')
 
-    # Regular expression to detect amounts, allowing comma or period as separators
-    # Handles numbers like 1,000.50 (English) and 1000,50 (French)
-    money_pattern = re.compile(r'\b\d{1,3}(?:,\d{3})*(?:[.,]\d{2})?\b')
+    # Regular expression to detect numeric values (e.g., 123.45 or 123,45)
+    money_pattern = re.compile(r'\b\d{1,3}(?:[.,]?\d{3})*(?:[.,]\d{2})?\b')
 
     total_amount = None
 
-    # Iterate over lines to find every occurrence of 'total'
+    # Iterate over lines to find every occurrence of 'total' or 'sous-total'
     for i, line in enumerate(lines):
-        if 'total' in line:
-            # Check the next line for a numeric value
+        if 'total' in line or 'sous-total' in line:
+            # Search for a numeric value on the same line
+            match = money_pattern.search(line)
+            if match:
+                total_amount = match.group().replace(',', '.')
+                continue  # Move to the next occurrence if any
+
+            # If no match in the same line, check the next line
             if i + 1 < len(lines):
                 next_line = lines[i + 1]
                 match = money_pattern.search(next_line)
                 if match:
-                    matched_value = match.group()
-                    
-                    # Handle English style: 1,000.50 or 1000.50
-                    if '.' in matched_value:
-                        total_amount = matched_value.replace(',', '')  # Remove thousands commas if any
+                    total_amount = match.group().replace(',', '.')
+                    continue  # Move to the next occurrence if any
 
-                    # Handle French style: 1000,50
-                    elif ',' in matched_value:
-                        total_amount = matched_value.replace(',', '.')  # Treat comma as decimal
-
+    # Return the last total amount found
     return total_amount if total_amount else "Total amount not found"
 
 
