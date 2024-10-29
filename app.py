@@ -155,40 +155,28 @@ import re
 
 def extract_total(text):
     """
-    Extracts the total amount from a receipt by finding occurrences of 'total' and 'sous-total',
-    then looking for numeric values on the same or next line. Supports both commas and periods as
-    decimal separators.
+    Extracts the total amount from a receipt by capturing all monetary values and selecting the largest.
     """
-    # Convert the text to lowercase for consistent matching
+    # Convert text to lowercase for consistent matching
     text_lower = text.lower()
 
-    # Split the text into lines
-    lines = text_lower.split('\n')
+    # Regex pattern to detect both English and French currency formats
+    money_pattern = re.compile(r'\b\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})\b')
+    
+    # Find all monetary values
+    amounts = money_pattern.findall(text_lower)
+    
+    # Normalize and convert matched values to floats
+    numeric_amounts = []
+    for amount in amounts:
+        # Replace thousand separators and ensure proper decimal formatting
+        normalized_amount = amount.replace(',', '').replace('.', '')  # Remove separators
+        numeric_amount = float(normalized_amount[:-2] + '.' + normalized_amount[-2:])  # Format as float
+        numeric_amounts.append(numeric_amount)
+    
+    # Return the largest amount if any were found
+    return max(numeric_amounts) if numeric_amounts else "Total amount not found"
 
-    # Regular expression to detect numeric values (e.g., 123.45 or 123,45)
-    money_pattern = re.compile(r'\b\d{1,3}(?:[.,]?\d{3})*(?:[.,]\d{2})?\b')
-
-    total_amount = None
-
-    # Iterate over lines to find every occurrence of 'total' or 'sous-total'
-    for i, line in enumerate(lines):
-        if 'total' in line or 'sous-total' in line:
-            # Search for a numeric value on the same line
-            match = money_pattern.search(line)
-            if match:
-                total_amount = match.group().replace(',', '.')
-                continue  # Move to the next occurrence if any
-
-            # If no match in the same line, check the next line
-            if i + 1 < len(lines):
-                next_line = lines[i + 1]
-                match = money_pattern.search(next_line)
-                if match:
-                    total_amount = match.group().replace(',', '.')
-                    continue  # Move to the next occurrence if any
-
-    # Return the last total amount found
-    return total_amount if total_amount else "Total amount not found"
 
 
 # Route to show monthly report of total expenses
