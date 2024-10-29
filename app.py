@@ -136,8 +136,9 @@ def upload_receipt():
     response = client.text_detection(image=image)
     texts = response.text_annotations
 
-    # Extract the full text
+    # Extract the full text and print it for debugging
     full_text = texts[0].description if texts else ""
+    print("OCR Detected Text:\n", full_text)
 
     # Call the refined extract_total function
     total_amount = extract_total(full_text)
@@ -149,7 +150,6 @@ def upload_receipt():
     os.remove(filepath)
 
     return f'Total amount: {total_amount}'
-
 def extract_total(text):
     """
     Extracts the total amount from a receipt by finding the last occurrence of 'total' 
@@ -209,3 +209,4 @@ if __name__ == '__main__':
     # Get the port from Heroku's environment variable or default to 5000 locally
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+    
