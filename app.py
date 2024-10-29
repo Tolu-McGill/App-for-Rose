@@ -192,36 +192,49 @@ def extract_total(text):
     Extracts the total amount by identifying the amount next to specific keywords like 'Total' or 'À PAYER'.
     If no keyword is found, it defaults to selecting the largest monetary amount detected.
     """
+    # Clean up the OCR text to improve matching
+    cleaned_text = re.sub(r'[^0-9a-zA-Z.,\s]', '', text)  # Remove unexpected symbols
+    cleaned_text = cleaned_text.replace("CADS", "CAD $")  # Correct OCR misreads if necessary
+
     # Convert text to lowercase for consistent matching
-    text_lower = text.lower()
+    text_lower = cleaned_text.lower()
     
     # Define keywords to identify total amounts
     total_keywords = [r"total", r"à payer", r"amount due", r"montant", r"amount"]
     
-    # Regex pattern to detect monetary values following keywords
-    total_pattern = re.compile(r"(?:{}).*?(\d{{1,3}}(?:[.,]\d{{3}})*(?:[.,]\d{{2}}))".format("|".join(total_keywords)), re.IGNORECASE)
+    # Regex pattern to detect monetary values following keywords, with improved flexibility
+    total_pattern = re.compile(
+        r"(?:{}).*?(\d{{1,3}}(?:[.,\s]?\d{{3}})*(?:[.,\s]?\d{{2}}))".format("|".join(total_keywords)), 
+        re.IGNORECASE
+    )
     
     # Search for a total amount near keywords
     keyword_match = total_pattern.search(text_lower)
     if keyword_match:
         # Normalize and convert matched value to float
-        amount = keyword_match.group(1)
-        normalized_amount = amount.replace(',', '').replace('.', '')  # Remove separators
-        total_amount = float(normalized_amount[:-2] + '.' + normalized_amount[-2:])  # Format as float
-        return total_amount
+        amount = keyword_match.group(1).replace(' ', '').replace(',', '.')  # Handle spacing and commas
+        try:
+            total_amount = float(amount)
+            return total_amount
+        except ValueError:
+            return "Total amount not found"
 
     # Fallback: If no keyword match, detect all monetary values and select the largest
-    money_pattern = re.compile(r'\b\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})\b')
+    money_pattern = re.compile(r'\b\d{1,3}(?:[.,\s]?\d{3})*(?:[.,\s]?\d{2})\b')
     amounts = money_pattern.findall(text_lower)
 
     numeric_amounts = []
     for amount in amounts:
-        normalized_amount = amount.replace(',', '').replace('.', '')  # Remove separators
-        numeric_amount = float(normalized_amount[:-2] + '.' + normalized_amount[-2:])  # Format as float
-        numeric_amounts.append(numeric_amount)
+        normalized_amount = amount.replace(' ', '').replace(',', '.')  # Handle spacing and commas
+        try:
+            numeric_amount = float(normalized_amount)
+            numeric_amounts.append(numeric_amount)
+        except ValueError:
+            continue
 
     # Return the largest amount if no keyword-based total found
     return max(numeric_amounts) if numeric_amounts else "Total amount not found"
+
 
 
 
