@@ -8,6 +8,7 @@ import hashlib
 from datetime import datetime
 import json
 import tempfile
+import cv2
 
 # Get the Google Cloud credentials JSON from the Heroku environment variable
 credentials_json = os.getenv('GOOGLE_APPLICATION_CREDENTIALS_JSON')  # This assumes you set it as 'GOOGLE_APPLICATION_CREDENTIALS_JSON'
@@ -96,6 +97,34 @@ def compute_file_hash(file_path):
 def index():
     return render_template('index.html')
 
+
+def upscale_image(image, scale_factor=2):
+    return cv2.resize(image, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_CUBIC)
+
+def to_grayscale(image):
+    return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+def apply_threshold(image):
+    return cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+
+def denoise_image(image):
+    return cv2.fastNlMeansDenoising(image, None, 30, 7, 21)
+
+def sharpen_image(image):
+    kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
+    return cv2.filter2D(image, -1, kernel)
+
+def preprocess_image(image_path):
+    image = cv2.imread(image_path, cv2.IMREAD_COLOR)
+    upscaled_image = upscale_image(image, scale_factor=2)
+    grayscale_image = to_grayscale(upscaled_image)
+    thresholded_image = apply_threshold(grayscale_image)
+    denoised_image = denoise_image(thresholded_image)
+    final_image = sharpen_image(denoised_image)
+    processed_image_path = os.path.join(os.path.dirname(image_path), "processed_" + os.path.basename(image_path))
+    cv2.imwrite(processed_image_path, final_image)
+    return processed_image_path
+
 @app.route('/upload', methods=['POST'])
 def upload_receipt():
     if 'receipt' not in request.files:
@@ -105,15 +134,18 @@ def upload_receipt():
     if file.filename == '':
         return "No selected file"
 
-    # Save the uploaded file to a relative path (Heroku uses Linux-based paths)
-    upload_folder = os.path.join(BASE_DIR, 'uploads')  # Use a relative path
+    # Save the uploaded file temporarily
+    upload_folder = os.path.join(BASE_DIR, 'uploads')
     if not os.path.exists(upload_folder):
         os.makedirs(upload_folder)
         
     filepath = os.path.join(upload_folder, file.filename)
     file.save(filepath)
 
-    # Compute the file hash
+    # Preprocess the image
+    processed_image_path = preprocess_image(filepath)
+
+    # Compute the file hash for deduplication
     file_hash = compute_file_hash(filepath)
 
     # Check if the file hash already exists in the database
@@ -125,33 +157,34 @@ def upload_receipt():
     conn.close()
 
     if result > 0:
-        os.remove(filepath)  # Optionally delete the file
+        os.remove(filepath)
+        os.remove(processed_image_path)  # Clean up
         return "This receipt has already been uploaded."
 
     # Process with Google Cloud Vision
-    with open(filepath, 'rb') as image_file:
+    with open(processed_image_path, 'rb') as image_file:
         content = image_file.read()
-
+    
     image = vision.Image(content=content)
     response = client.text_detection(image=image)
     texts = response.text_annotations
 
-    # Extract the full text and print it for debugging
+    # Extract text and print for debugging
     full_text = texts[0].description if texts else ""
     print("OCR Detected Text:\n", full_text)
 
-    # Call the refined extract_total function
+    # Extract the total amount from text
     total_amount = extract_total(full_text)
 
     if total_amount != "Total amount not found":
         store_total_in_db(float(total_amount), file_hash)
 
-    # Optionally, delete the file after processing
+    # Clean up files
     os.remove(filepath)
+    os.remove(processed_image_path)
 
     return f'Total amount: {total_amount}'
 
-import re
 
 def extract_total(text):
     """
