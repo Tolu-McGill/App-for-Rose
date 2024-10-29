@@ -189,26 +189,38 @@ def upload_receipt():
 
 def extract_total(text):
     """
-    Extracts the total amount from a receipt by capturing all monetary values and selecting the largest.
+    Extracts the total amount by identifying the amount next to specific keywords like 'Total' or 'À PAYER'.
+    If no keyword is found, it defaults to selecting the largest monetary amount detected.
     """
     # Convert text to lowercase for consistent matching
     text_lower = text.lower()
+    
+    # Define keywords to identify total amounts
+    total_keywords = [r"total", r"à payer", r"amount due", r"montant"]
+    
+    # Regex pattern to detect monetary values following keywords
+    total_pattern = re.compile(r"(?:{}).*?(\d{{1,3}}(?:[.,]\d{{3}})*(?:[.,]\d{{2}}))".format("|".join(total_keywords)), re.IGNORECASE)
+    
+    # Search for a total amount near keywords
+    keyword_match = total_pattern.search(text_lower)
+    if keyword_match:
+        # Normalize and convert matched value to float
+        amount = keyword_match.group(1)
+        normalized_amount = amount.replace(',', '').replace('.', '')  # Remove separators
+        total_amount = float(normalized_amount[:-2] + '.' + normalized_amount[-2:])  # Format as float
+        return total_amount
 
-    # Regex pattern to detect both English and French currency formats
+    # Fallback: If no keyword match, detect all monetary values and select the largest
     money_pattern = re.compile(r'\b\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})\b')
-    
-    # Find all monetary values
     amounts = money_pattern.findall(text_lower)
-    
-    # Normalize and convert matched values to floats
+
     numeric_amounts = []
     for amount in amounts:
-        # Replace thousand separators and ensure proper decimal formatting
         normalized_amount = amount.replace(',', '').replace('.', '')  # Remove separators
         numeric_amount = float(normalized_amount[:-2] + '.' + normalized_amount[-2:])  # Format as float
         numeric_amounts.append(numeric_amount)
-    
-    # Return the largest amount if any were found
+
+    # Return the largest amount if no keyword-based total found
     return max(numeric_amounts) if numeric_amounts else "Total amount not found"
 
 
