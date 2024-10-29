@@ -196,7 +196,7 @@ def extract_total(text):
     text_lower = text.lower()
     
     # Define keywords to identify total amounts
-    total_keywords = [r"total", r"à payer", r"amount due", r"montant"]
+    total_keywords = [r"total", r"à payer", r"amount due", r"montant", r"amount"]
     
     # Regex pattern to detect monetary values following keywords
     total_pattern = re.compile(r"(?:{}).*?(\d{{1,3}}(?:[.,]\d{{3}})*(?:[.,]\d{{2}}))".format("|".join(total_keywords)), re.IGNORECASE)
