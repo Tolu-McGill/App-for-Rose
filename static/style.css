@@ -1,31 +1,30 @@
 /* General Styling */
 body {
     font-family: 'Helvetica Neue', sans-serif;
-    background-color: #fef6f9; /* Very light pink for a soft backdrop */
-    color: #333;
+    background-color: #1e1e2f; /* Dark background */
+    color: #e0e0e0; /* Light grey for text */
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #ffe0e5; /* Soft pink */
-    color: #333;
+    background-color: #5a1d5e; /* Dark purple */
+    color: #ff8fb1; /* Soft pink */
     text-align: center;
     padding: 20px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 header h1 {
     color: #d4af37; /* Gold */
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 header a {
-    color: #333;
+    color: #e0e0e0;
     text-decoration: none;
     font-size: 1rem;
-    font-weight: bold;
 }
 
 /* Main Container */
@@ -33,9 +32,9 @@ main {
     margin: 20px auto;
     max-width: 800px;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    background-color: #2b2b3f; /* Darker background */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
 }
 
 /* Form Styling */
@@ -47,7 +46,7 @@ form {
 
 label {
     font-weight: bold;
-    color: #333;
+    color: #ff8fb1; /* Soft pink */
 }
 
 input[type="number"],
@@ -64,23 +63,23 @@ button {
 input[type="number"]:focus,
 select:focus {
     outline: none;
-    border-color: #ff8f8f; /* Darker pink for focus */
+    border-color: #a96dbb; /* Purple focus color */
 }
 
 button {
-    background-color: #d4af37; /* Gold */
-    color: #fff;
+    background-color: #a96dbb; /* Deep pink-purple */
+    color: #ffffff;
     cursor: pointer;
     font-weight: bold;
 }
 
 button:hover {
-    background-color: #ff8f8f; /* Soft pink */
+    background-color: #d4af37; /* Gold on hover */
 }
 
 /* Monthly Summary */
 #monthly-summary h2 {
-    color: #333;
+    color: #ff8fb1; /* Soft pink */
     font-size: 1.8rem;
     text-align: center;
     margin-bottom: 10px;
@@ -102,21 +101,21 @@ button:hover {
 #expense-breakdown td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #ffe0e5; /* Light pink border */
+    border-bottom: 1px solid #5a1d5e; /* Dark purple border */
 }
 
 #expense-breakdown th {
     background-color: #d4af37; /* Gold */
-    color: #fff;
+    color: #1e1e2f; /* Dark text */
 }
 
 #expense-breakdown tr:nth-child(even) {
-    background-color: #fef6f9; /* Soft pink for alternating rows */
+    background-color: #2b2b3f; /* Darker row background */
 }
 
 /* Chart Section */
 #chart-section h2 {
-    color: #333;
+    color: #ff8fb1; /* Soft pink */
     font-size: 1.5rem;
     text-align: center;
     margin-top: 30px;
@@ -125,4 +124,14 @@ button:hover {
 #expenseChart {
     max-width: 100%;
     height: auto;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #1e1e2f;
+    color: #ff8fb1;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
 }
