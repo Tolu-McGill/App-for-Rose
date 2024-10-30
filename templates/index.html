@@ -3,58 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UlomaApp</title>
+    <title>Budgeting App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
     <header>
-        <h1>Welcome to UlomaApp</h1>
+        <h1>Budgeting App</h1>
     </header>
-    
-    <!-- Section for uploading receipts -->
-    <div class="upload-section">
-        <h2>Upload Your Receipt</h2>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="receipt" accept="image/*" capture="camera" required>
-            <button type="submit">Upload</button>
-        </form>
-    </div>
 
-    <!-- Section for manual expense entry -->
-    <div class="expense-entry-section">
-        <h2>Add an Expense Manually</h2>
-        <form action="/add_expense" method="post">
-            <label for="category">Category:</label>
-            <select id="category" name="category" required>
-                <option value="Restaurants & Dining">Restaurants & Dining</option>
-                <option value="Groceries">Groceries</option>
-                <option value="Healthcare & Medicine">Healthcare & Medicine</option>
-                <option value="Clothing & Accessories">Clothing & Accessories</option>
-                <option value="Utilities">Utilities</option>
-                <option value="Transportation">Transportation</option>
-                <option value="Entertainment">Entertainment</option>
-                <option value="Education & Books">Education & Books</option>
-                <option value="Home & Maintenance">Home & Maintenance</option>
-                <option value="Personal Care">Personal Care</option>
-                <option value="Travel & Accommodation">Travel & Accommodation</option>
-                <option value="Electronics & Gadgets">Electronics & Gadgets</option>
-                <option value="Miscellaneous">Miscellaneous</option>
-            </select>
+    <main>
+        <!-- Form to add a new expense -->
+        <section id="expense-form">
+            <h2>Add a New Expense</h2>
+            <form action="{{ url_for('add_expense') }}" method="post">
+                <label for="amount">Total Amount:</label>
+                <input type="number" id="amount" name="amount" step="0.01" required placeholder="Enter total receipt amount">
+                
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="restaurants">Restaurants & Dining</option>
+                    <option value="groceries">Groceries</option>
+                    <option value="medicine">Medicine & Healthcare</option>
+                    <option value="clothing">Clothing & Accessories</option>
+                    <option value="entertainment">Entertainment & Leisure</option>
+                    <option value="transportation">Transportation & Fuel</option>
+                    <option value="utilities">Utilities & Bills</option>
+                    <option value="household">Household & Supplies</option>
+                    <option value="education">Education & Learning</option>
+                    <option value="gifts">Gifts & Donations</option>
+                    <option value="personal_care">Personal Care</option>
+                    <option value="travel">Travel & Lodging</option>
+                    <option value="insurance">Insurance</option>
+                    <option value="miscellaneous">Miscellaneous</option>
+                </select>
+                
+                <button type="submit">Add Expense</button>
+            </form>
+        </section>
 
-            <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" step="0.01" placeholder="Enter amount" required>
+        <!-- Display total amount spent so far this month -->
+        <section id="monthly-summary">
+            <h2>Monthly Summary</h2>
+            <p>Total Spent: ${{ total_spent }}</p>
+            <div id="expense-chart">
+                <!-- Chart container (to be displayed with JavaScript) -->
+            </div>
+        </section>
+    </main>
 
-            <button type="submit">Add Expense</button>
-        </form>
-    </div>
-
-    <!-- Link to view the monthly report -->
-    <div class="monthly-report-section">
-        <a href="{{ url_for('report') }}" class="btn btn-primary report-button">View Monthly Report</a>
-    </div>
-
-    <footer>
-        <p>Designed for Uloma with ❤️</p>
-    </footer>
 </body>
 </html>

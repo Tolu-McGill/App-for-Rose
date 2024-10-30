@@ -1,95 +1,108 @@
+/* General Styling */
 body {
-    font-family: 'Helvetica Neue', sans-serif;
-    background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 100vh;
-}
-
-header h1 {
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px #ccc;
-}
-
-.upload-section, .expense-entry-section {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-bottom: 20px;
-    width: 90%;
-    max-width: 500px;
-}
-
-.upload-section h2, .expense-entry-section h2 {
     color: #333;
 }
 
-.upload-section input[type="file"],
-.expense-entry-section select,
-.expense-entry-section input[type="number"] {
+header {
+    background-color: #007bff;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+main {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Form Styling for index.html */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+select, input[type="text"], input[type="number"], button {
     padding: 10px;
-    border: 1px solid #ccc;
-    background: #f7f7f7;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
     border-radius: 5px;
     width: 100%;
-    box-sizing: border-box;
 }
 
-.upload-section button, .expense-entry-section button {
-    padding: 10px 20px;
-    background: #8e44ad;
+button {
+    background-color: #007bff;
     color: #fff;
-    border: none;
-    border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
-.upload-section button:hover, .expense-entry-section button:hover {
-    background-color: #7a3799;
+button:hover {
+    background-color: #0056b3;
 }
 
-.expense-entry-section label {
-    display: block;
-    color: #555;
-    font-weight: bold;
-    margin-top: 10px;
+/* Table Styling for report.html */
+#expense-breakdown table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1rem;
+}
+
+#expense-breakdown th, #expense-breakdown td {
+    padding: 12px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-.monthly-report-section {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.report-button {
-    background-color: #ff6347;
+#expense-breakdown th {
+    background-color: #007bff;
     color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
 }
 
-.report-button:hover {
-    background-color: #ff8566;
+#expense-breakdown tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
-footer {
-    color: white;
-    margin-top: 40px;
-    padding-bottom: 20px;
+/* Monthly Summary Styling */
+#monthly-summary h2 {
+    font-size: 1.5rem;
+    color: #333;
     text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Chart Section Styling */
+#chart-section {
+    text-align: center;
+    margin: 30px 0;
+}
+
+#expenseChart {
+    max-width: 100%;
+    height: auto;
 }
