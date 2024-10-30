@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monthly Report</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for pie chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -48,7 +48,6 @@
         </section>
     </main>
 
-    <!-- JavaScript to render the chart -->
     <script>
         const ctx = document.getElementById('expenseChart').getContext('2d');
         const expenseChart = new Chart(ctx, {
