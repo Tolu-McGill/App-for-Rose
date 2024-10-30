@@ -12,8 +12,14 @@
     </header>
     
     <div class="report-section">
-        <h2>Here is your total spending for the month:</h2>
-        <p class="report-total">{{ report }}</p>
+        <h2>Total Spending for the Month</h2>
+        <p class="report-total">Total: ${{ total_spent }}</p>
+
+        <!-- Display the pie chart -->
+        <div class="chart-container">
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Monthly Expense Breakdown">
+        </div>
+
         <a href="/" class="btn btn-primary">Go Back to Home</a>
     </div>
 

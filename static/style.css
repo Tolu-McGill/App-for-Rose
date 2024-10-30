@@ -7,7 +7,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    min-height: 100vh; /* Make sure the body takes the full height of the viewport */
+    min-height: 100vh;
 }
 
 header h1 {
@@ -17,27 +17,35 @@ header h1 {
     text-shadow: 2px 2px #ccc;
 }
 
-.upload-section {
+.upload-section, .expense-entry-section {
     background: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    margin-bottom: 20px;
+    width: 90%;
+    max-width: 500px;
 }
 
-.upload-section h2 {
+.upload-section h2, .expense-entry-section h2 {
     color: #333;
 }
 
-.upload-section input[type="file"] {
+.upload-section input[type="file"],
+.expense-entry-section select,
+.expense-entry-section input[type="number"] {
     padding: 10px;
-    border: none;
+    border: 1px solid #ccc;
     background: #f7f7f7;
     margin-top: 10px;
+    margin-bottom: 10px;
     border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.upload-section button {
+.upload-section button, .expense-entry-section button {
     padding: 10px 20px;
     background: #8e44ad;
     color: #fff;
@@ -45,6 +53,19 @@ header h1 {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.upload-section button:hover, .expense-entry-section button:hover {
+    background-color: #7a3799;
+}
+
+.expense-entry-section label {
+    display: block;
+    color: #555;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: left;
 }
 
 .monthly-report-section {
@@ -53,7 +74,7 @@ header h1 {
 }
 
 .report-button {
-    background-color: #ff6347; /* A modern chic color */
+    background-color: #ff6347;
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
@@ -63,12 +84,12 @@ header h1 {
 }
 
 .report-button:hover {
-    background-color: #ff8566; /* Lighter shade on hover */
+    background-color: #ff8566;
 }
 
 footer {
     color: white;
-    margin-top: 40px; /* Adjust this value to increase space */
-    padding-bottom: 20px; /* Adds some padding to ensure it's not too close to the screen edge */
+    margin-top: 40px;
+    padding-bottom: 20px;
     text-align: center;
 }

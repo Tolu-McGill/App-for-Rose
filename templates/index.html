@@ -11,16 +11,44 @@
         <h1>Welcome to UlomaApp</h1>
     </header>
     
+    <!-- Section for uploading receipts -->
     <div class="upload-section">
         <h2>Upload Your Receipt</h2>
-        <!-- Updated form -->
         <form action="/upload" method="post" enctype="multipart/form-data">
-            <!-- Use the 'capture' attribute to open the camera on mobile devices -->
             <input type="file" name="receipt" accept="image/*" capture="camera" required>
             <button type="submit">Upload</button>
         </form>
     </div>
 
+    <!-- Section for manual expense entry -->
+    <div class="expense-entry-section">
+        <h2>Add an Expense Manually</h2>
+        <form action="/add_expense" method="post">
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="Restaurants & Dining">Restaurants & Dining</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Healthcare & Medicine">Healthcare & Medicine</option>
+                <option value="Clothing & Accessories">Clothing & Accessories</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Education & Books">Education & Books</option>
+                <option value="Home & Maintenance">Home & Maintenance</option>
+                <option value="Personal Care">Personal Care</option>
+                <option value="Travel & Accommodation">Travel & Accommodation</option>
+                <option value="Electronics & Gadgets">Electronics & Gadgets</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+            </select>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" step="0.01" placeholder="Enter amount" required>
+
+            <button type="submit">Add Expense</button>
+        </form>
+    </div>
+
+    <!-- Link to view the monthly report -->
     <div class="monthly-report-section">
         <a href="{{ url_for('report') }}" class="btn btn-primary report-button">View Monthly Report</a>
     </div>
