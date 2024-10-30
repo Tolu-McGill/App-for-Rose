@@ -30,7 +30,6 @@ def init_db():
     print("Initializing the PostgreSQL database...")
     conn = get_db_connection()
     cursor = conn.cursor()
-    # Create the expenses table if it doesn't exist
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS expenses (
             id SERIAL PRIMARY KEY,
