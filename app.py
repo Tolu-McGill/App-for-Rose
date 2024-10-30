@@ -30,18 +30,21 @@ def init_db():
     print("Initializing the PostgreSQL database...")
     conn = get_db_connection()
     cursor = conn.cursor()
+    # Create the expenses table if it doesn't exist
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS expenses (
             id SERIAL PRIMARY KEY,
-            date DATE,
+            date TEXT,
             amount REAL,
-            category TEXT
+            category TEXT,
+            file_hash TEXT
         )
     ''')
     conn.commit()
     cursor.close()
     conn.close()
     print("PostgreSQL database initialized successfully.")
+
 
 # Route to show the index page
 @app.route('/')
