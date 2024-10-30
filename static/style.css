@@ -1,105 +1,125 @@
 /* General Styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #fef6f9; /* Very light pink for a soft backdrop */
+    color: #333;
     margin: 0;
     padding: 0;
-    color: #333;
 }
 
 header {
-    background-color: #007bff;
-    padding: 20px;
-    color: #fff;
+    background-color: #ffe0e5; /* Soft pink */
+    color: #333;
     text-align: center;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
+    color: #d4af37; /* Gold */
     margin: 0;
     font-size: 2rem;
 }
 
 header a {
-    color: #fff;
+    color: #333;
     text-decoration: none;
     font-size: 1rem;
+    font-weight: bold;
 }
 
+/* Main Container */
 main {
     margin: 20px auto;
     max-width: 800px;
     padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
-/* Form Styling for index.html */
+/* Form Styling */
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 label {
     font-weight: bold;
-    margin-bottom: 5px;
+    color: #333;
 }
 
-select, input[type="text"], input[type="number"], button {
-    padding: 10px;
+input[type="number"],
+select,
+button {
+    padding: 12px;
     font-size: 1rem;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
+    border: 1px solid #d4af37; /* Gold */
+    border-radius: 8px;
     width: 100%;
+    transition: all 0.3s ease;
+}
+
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: #ff8f8f; /* Darker pink for focus */
 }
 
 button {
-    background-color: #007bff;
+    background-color: #d4af37; /* Gold */
     color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-weight: bold;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #ff8f8f; /* Soft pink */
 }
 
-/* Table Styling for report.html */
-#expense-breakdown table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 1rem;
-}
-
-#expense-breakdown th, #expense-breakdown td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-#expense-breakdown th {
-    background-color: #007bff;
-    color: white;
-}
-
-#expense-breakdown tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-/* Monthly Summary Styling */
+/* Monthly Summary */
 #monthly-summary h2 {
-    font-size: 1.5rem;
     color: #333;
+    font-size: 1.8rem;
     text-align: center;
     margin-bottom: 10px;
 }
 
-/* Chart Section Styling */
-#chart-section {
+#expense-chart {
+    margin-top: 20px;
+}
+
+/* Table Styling */
+#expense-breakdown table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+#expense-breakdown th,
+#expense-breakdown td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ffe0e5; /* Light pink border */
+}
+
+#expense-breakdown th {
+    background-color: #d4af37; /* Gold */
+    color: #fff;
+}
+
+#expense-breakdown tr:nth-child(even) {
+    background-color: #fef6f9; /* Soft pink for alternating rows */
+}
+
+/* Chart Section */
+#chart-section h2 {
+    color: #333;
+    font-size: 1.5rem;
     text-align: center;
-    margin: 30px 0;
+    margin-top: 30px;
 }
 
 #expenseChart {
