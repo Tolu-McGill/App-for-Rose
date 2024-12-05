@@ -25,15 +25,15 @@ header h1 {
 /* Main Container */
 main {
     margin: 20px auto;
-    max-width: 900px; /* Increased width for better layout */
+    max-width: 900px;
     padding: 20px;
     display: flex;
-    flex-wrap: wrap; /* Arrange sections in rows if screen is wide */
+    flex-wrap: wrap; /* Arrange sections in rows */
     gap: 20px;
     justify-content: center;
 }
 
-/* New Card Styling for Sections */
+/* Card Styling */
 .card {
     background-color: #2b2b3f; /* Slightly lighter than the main background */
     padding: 20px;
@@ -43,101 +43,40 @@ main {
     text-align: center;
 }
 
-/* For Full-Width Sections */
+/* Full-Width Card */
 .card.full-width {
     width: 100%;
 }
 
-/* Button Styling */
-.button {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #d4af37; /* Gold */
-    color: #1e1e2f; /* Dark text */
-    text-align: center;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
+/* Responsive Styling for Mobile */
+@media screen and (max-width: 768px) {
+    main {
+        flex-direction: column;
+        gap: 15px;
+    }
 
-.button:hover {
-    background-color: #ff8fb1; /* Soft pink */
-    color: #1e1e2f;
-}
+    .card {
+        width: 100%; /* Full width for all cards */
+    }
 
-/* Form Styling */
-.form-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
+    header h1 {
+        font-size: 2rem; /* Smaller title for smaller screens */
+    }
 
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #ff8fb1; /* Soft pink */
-}
+    input[type="number"],
+    select {
+        max-width: 100%; /* Take full width on smaller screens */
+    }
 
-input[type="number"],
-select {
-    max-width: 300px; /* Adjusted width for better aesthetics */
-    margin: 0 auto; /* Center-align input fields */
-    padding: 12px;
-    border: 1px solid #d4af37; /* Gold */
-    border-radius: 8px;
-    background-color: #1e1e2f;
-    color: #e0e0e0;
-    transition: border-color 0.3s ease;
-}
+    #expenseChart {
+        max-width: 100%; /* Ensure chart fits smaller screens */
+        height: auto; /* Adjust height automatically */
+    }
 
-input[type="number"]:focus,
-select:focus {
-    border-color: #a96dbb; /* Purple focus color */
-}
-
-/* Table Styling */
-#expense-breakdown {
-    display: flex;
-    justify-content: center; /* Center table */
-    margin-top: 20px;
-}
-
-#expense-breakdown table {
-    width: 80%; /* Reduced width for better layout */
-    border-collapse: collapse;
-    font-size: 1rem;
-}
-
-#expense-breakdown th,
-#expense-breakdown td {
-    padding: 12px;
-    text-align: center; /* Center-align content */
-    border-bottom: 1px solid #5a1d5e; /* Dark purple border */
-}
-
-#expense-breakdown th {
-    background-color: #d4af37; /* Gold */
-    color: #1e1e2f; /* Dark text */
-}
-
-#expense-breakdown tr:nth-child(even) {
-    background-color: #2b2b3f; /* Darker row background */
-}
-
-/* Chart Section */
-#chart-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center chart */
-    margin-top: 60px;
-}
-
-#expenseChart {
-    max-width: 700px; /* Larger chart for better visibility */
-    height: 500px;
-    margin: 0 auto;
-    display: block;
+    #expense-breakdown table {
+        width: 100%; /* Table spans full width */
+        font-size: 0.9rem; /* Reduce font size slightly */
+    }
 }
 
 /* Footer Styling */
@@ -148,39 +87,4 @@ footer {
     padding: 10px;
     font-size: 0.9rem;
     box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Logo Styling */
-.logo {
-    width: 60px; /* Adjust as needed */
-    height: auto;
-    margin-right: 15px;
-    vertical-align: middle;
-}
-
-/* Historical Reports Section */
-#historical-reports ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-#historical-reports li {
-    margin: 10px 0;
-    color: #e0e0e0;
-    font-size: 1.1rem;
-    text-align: left;
-}
-
-/* Monthly Tracker Section */
-#monthly-tracker ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-#monthly-tracker li {
-    margin: 8px 0;
-    color: #ff8fb1;
-    font-size: 1rem;
-    text-align: left;
 }
