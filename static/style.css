@@ -16,16 +16,28 @@ header {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+header .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 header h1 {
     color: #d4af37; /* Gold */
-    margin: 0;
+    margin: 0 10px;
     font-size: 2.5rem;
+}
+
+header img.logo {
+    width: 60px;
+    height: auto;
+    margin-right: 10px;
 }
 
 /* Main Container */
 main {
     margin: 20px auto;
-    max-width: 900px; /* Increased width for desktop */
+    max-width: 1200px; /* Suitable for desktop and large screens */
     padding: 20px;
     display: flex;
     flex-wrap: wrap; /* Arrange sections in rows */
@@ -39,55 +51,73 @@ main {
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    width: calc(45% - 20px); /* Two cards per row on desktop */
     text-align: center;
+    flex: 1 1 calc(45% - 20px); /* Two cards per row */
+    max-width: 500px;
 }
 
 /* Full-Width Card */
 .card.full-width {
-    width: 100%;
+    flex: 1 1 100%;
+    max-width: 100%;
 }
 
-/* Responsive Styling for Mobile */
-@media screen and (max-width: 768px) {
-    main {
-        flex-direction: column; /* Stack cards vertically */
-        gap: 15px;
-    }
+/* Button Styling */
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #d4af37; /* Gold */
+    color: #1e1e2f; /* Dark text */
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
 
-    .card {
-        width: 100%; /* Full width for cards */
-    }
+.button:hover {
+    background-color: #ff8fb1; /* Soft pink */
+    color: #1e1e2f;
+}
 
-    header h1 {
-        font-size: 2rem; /* Smaller title for smaller screens */
-    }
+/* Form Styling */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
 
-    input[type="number"],
-    select {
-        max-width: 100%; /* Take full width on smaller screens */
-    }
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ff8fb1; /* Soft pink */
+}
 
-    #expenseChart {
-        max-width: 90%; /* Chart adapts to screen width */
-        height: auto; /* Adjust height automatically */
-    }
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d4af37; /* Gold */
+    border-radius: 8px;
+    background-color: #1e1e2f;
+    color: #e0e0e0;
+    transition: border-color 0.3s ease;
+}
 
-    #expense-breakdown table {
-        width: 100%; /* Table spans full width */
-        font-size: 0.9rem; /* Slightly smaller text */
-    }
+input[type="number"]:focus,
+select:focus {
+    border-color: #a96dbb; /* Purple focus color */
 }
 
 /* Table Styling */
 #expense-breakdown {
     display: flex;
-    justify-content: center; /* Center table */
+    justify-content: center;
     margin-top: 20px;
 }
 
 #expense-breakdown table {
-    width: 80%; /* Adjust width for better layout */
+    width: 90%; /* Adjusted for better fit */
     border-collapse: collapse;
     font-size: 1rem;
 }
@@ -95,7 +125,7 @@ main {
 #expense-breakdown th,
 #expense-breakdown td {
     padding: 12px;
-    text-align: center; /* Center-align content */
+    text-align: center;
     border-bottom: 1px solid #5a1d5e; /* Dark purple border */
 }
 
@@ -112,14 +142,14 @@ main {
 #chart-section {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center chart */
+    align-items: center;
     margin-top: 30px;
 }
 
 #expenseChart {
-    max-width: 600px; /* Larger for desktop, auto-adjust for mobile */
-    width: 90%; /* Flexible width for all devices */
-    height: 400px; /* Consistent height */
+    max-width: 700px; /* Larger chart for better visibility */
+    height: auto;
+    margin: 0 auto;
 }
 
 /* Footer Styling */
@@ -132,10 +162,33 @@ footer {
     box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Logo Styling */
-.logo {
-    width: 60px; /* Adjust as needed */
-    height: auto;
-    margin-right: 15px;
-    vertical-align: middle;
+/* Responsive Styling for Mobile */
+@media screen and (max-width: 768px) {
+    main {
+        flex-direction: column; /* Stack cards vertically */
+        gap: 15px;
+    }
+
+    .card {
+        width: 100%; /* Full width for smaller screens */
+    }
+
+    header h1 {
+        font-size: 2rem; /* Adjust header size */
+    }
+
+    input[type="number"],
+    select {
+        width: 100%; /* Full width for inputs */
+    }
+
+    #expenseChart {
+        max-width: 90%;
+        height: auto; /* Adjust height automatically */
+    }
+
+    #expense-breakdown table {
+        width: 100%; /* Table spans full width */
+        font-size: 0.9rem; /* Slightly smaller text */
+    }
 }

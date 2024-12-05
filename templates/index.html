@@ -9,7 +9,6 @@
 <body>
 
     <header>
-        <!-- Logo and Title -->
         <div class="header-content">
             <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
             <h1>Uloma's Budgeting App</h1>
@@ -17,9 +16,8 @@
     </header>
 
     <main>
-        <section class="grid-container">
-            <!-- Add Expense Form -->
-            <div id="expense-form" class="card">
+        <div class="grid-container">
+            <section id="expense-form" class="card">
                 <h2>Add a New Expense</h2>
                 <form action="{{ url_for('add_expense') }}" method="post">
                     <div class="form-group">
@@ -48,31 +46,28 @@
                     </div>
                     <button type="submit">Add Expense</button>
                 </form>
-            </div>
+            </section>
 
-            <!-- Monthly Summary -->
-            <div id="monthly-summary" class="card">
+            <section id="monthly-summary" class="card">
                 <h2>Monthly Summary</h2>
                 <p>Total Spent: <strong>${{ total_spent }}</strong></p>
                 <a href="{{ url_for('report') }}" class="button">View Monthly Summary</a>
-            </div>
+            </section>
 
-            <!-- Historical Reports -->
-            <div id="historical-reports" class="card">
+            <section id="historical-reports" class="card">
                 <h2>View Historical Reports</h2>
                 <a href="{{ url_for('history') }}" class="button">View Previous Reports</a>
-            </div>
+            </section>
 
-            <!-- Monthly Tracker -->
-            <div id="monthly-tracker" class="card">
+            <section id="monthly-tracker" class="card">
                 <h2>Entries This Month</h2>
                 <ul>
                     {% for entry in current_entries %}
                     <li><strong>{{ entry[0] }}</strong>: ${{ entry[1] }} - <em>{{ entry[2] }}</em></li>
                     {% endfor %}
                 </ul>
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
 
     <footer>

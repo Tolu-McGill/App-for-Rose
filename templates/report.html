@@ -19,7 +19,6 @@
             <h2>Total Spent: <strong>${{ total_spent }}</strong></h2>
         </section>
 
-        <!-- Table of Expenses by Category -->
         <section id="expense-breakdown" class="card">
             <table>
                 <thead>
@@ -39,7 +38,6 @@
             </table>
         </section>
 
-        <!-- Pie Chart for Visual Representation -->
         <section id="chart-section">
             <canvas id="expenseChart"></canvas>
         </section>
@@ -54,10 +52,7 @@
                 datasets: [{
                     label: 'Expenses by Category',
                     data: [{% for amount in expenses_by_category.values() %}{{ amount }}, {% endfor %}],
-                    backgroundColor: [
-                        '#FF6F61', '#6B5B95', '#88B04B', '#F7CAC9', '#92A8D1', '#955251', '#B565A7', '#009B77', '#DD4124', '#45B8AC',
-                        '#EFC050', '#5B5EA6', '#9B2335', '#DFCFBE', '#BC243C', '#C3447A', '#98B4D4', '#D65076', '#7FCDCD', '#FFD662'
-                    ],
+                    backgroundColor: ['#FF6F61', '#6B5B95', '#88B04B', '#F7CAC9', '#92A8D1', '#955251', '#B565A7', '#009B77', '#DD4124'],
                     hoverOffset: 8
                 }]
             },
@@ -67,7 +62,7 @@
                     legend: {
                         position: 'bottom',
                         labels: {
-                            color: '#e0e0e0', // Matches site's font color
+                            color: '#e0e0e0',
                             font: {
                                 size: 14
                             }
