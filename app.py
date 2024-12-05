@@ -127,6 +127,36 @@ def history():
     historical_reports = {row[0].strftime('%B %Y'): row[1] for row in reports}
     return render_template('history.html', historical_reports=historical_reports)
 
+@app.route('/report/<month>')
+def report_by_month(month):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Parse the month string back into a date
+    month_start = datetime.strptime(month, '%B %Y')
+
+    # Fetch the breakdown for the given month
+    cursor.execute('''
+        SELECT category, SUM(amount) 
+        FROM expenses 
+        WHERE date_trunc('month', date::date) = %s
+        GROUP BY category
+    ''', (month_start,))
+    expenses = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    # Format the data for rendering
+    expenses_by_category = {category: amount for category, amount in expenses}
+    total_spent = sum(expenses_by_category.values())
+
+    return render_template(
+        'report.html', 
+        expenses_by_category=expenses_by_category, 
+        total_spent=total_spent, 
+        month=month
+    )
+
 if __name__ == '__main__':
     init_db()
     port = int(os.environ.get('PORT', 5000))
