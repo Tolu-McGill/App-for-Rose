@@ -16,7 +16,9 @@
             <h2>Previous Reports</h2>
             <ul>
                 {% for month, total in historical_reports.items() %}
-                <li>{{ month }}: ${{ total }}</li>
+                <li>
+                    <a href="{{ url_for('report_by_month', month=month) }}">{{ month }}</a>: ${{ total }}
+                </li>
                 {% endfor %}
             </ul>
         </section>
