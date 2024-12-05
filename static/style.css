@@ -130,7 +130,7 @@ select:focus {
     display: flex;
     flex-direction: column;
     align-items: center; /* Center chart */
-    margin-top: 30px;
+    margin-top: 60px;
 }
 
 #expenseChart {
