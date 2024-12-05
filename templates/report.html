@@ -15,9 +15,12 @@
     </header>
 
     <main>
-        <!-- Table of Expenses by Category with Total Spent -->
-        <section id="expense-breakdown">
-            <h2>Total Spent This Month: ${{ total_spent }}</h2>
+        <section id="report-summary" class="card">
+            <h2>Total Spent: <strong>${{ total_spent }}</strong></h2>
+        </section>
+
+        <!-- Table of Expenses by Category -->
+        <section id="expense-breakdown" class="card">
             <table>
                 <thead>
                     <tr>
@@ -55,7 +58,7 @@
                         '#FF6F61', '#6B5B95', '#88B04B', '#F7CAC9', '#92A8D1', '#955251', '#B565A7', '#009B77', '#DD4124', '#45B8AC',
                         '#EFC050', '#5B5EA6', '#9B2335', '#DFCFBE', '#BC243C', '#C3447A', '#98B4D4', '#D65076', '#7FCDCD', '#FFD662'
                     ],
-                    hoverOffset: 6
+                    hoverOffset: 8
                 }]
             },
             options: {
@@ -64,7 +67,7 @@
                     legend: {
                         position: 'bottom',
                         labels: {
-                            color: '#e0e0e0', // Matches the site's light font
+                            color: '#e0e0e0', // Matches site's font color
                             font: {
                                 size: 14
                             }
@@ -74,7 +77,7 @@
             }
         });
     </script>
-    
+
     <footer>
         <p>Designed for Uloma with ❤️</p>
     </footer>
