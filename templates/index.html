@@ -51,6 +51,12 @@
             <p>Total Spent: ${{ total_spent }}</p>
             <a href="{{ url_for('report') }}">View Monthly Summary</a>
         </section>
+
+        <!-- Add a button for viewing historical reports -->
+        <section id="historical-reports">
+            <h2>View Historical Reports</h2>
+            <a href="{{ url_for('history') }}" class="button">View Previous Reports</a>
+        </section>
     </main>
     <footer>
         <p>Designed for Uloma with ❤️</p>
