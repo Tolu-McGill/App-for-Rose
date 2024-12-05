@@ -166,7 +166,7 @@ footer {
 @media screen and (max-width: 768px) {
     main {
         flex-direction: column; /* Stack cards vertically */
-        gap: 15px;
+        gap: 50px;
     }
 
     .card {
