@@ -116,6 +116,7 @@ def history():
     cursor.execute('''
         SELECT DISTINCT date_trunc('month', date::date) AS month, SUM(amount)
         FROM expenses
+        WHERE date_trunc('month', date::date) < date_trunc('month', CURRENT_DATE)
         GROUP BY date_trunc('month', date::date)
         ORDER BY month DESC
     ''')
