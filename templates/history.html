@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historical Reports</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Historical Expense Reports</h1>
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </header>
+    <main>
+        <section id="historical-reports">
+            <h2>Previous Reports</h2>
+            <ul>
+                {% for month, total in historical_reports.items() %}
+                <li>{{ month }}: ${{ total }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>Designed for Uloma with ❤️</p>
+    </footer>
+</body>
+</html>
