@@ -142,3 +142,35 @@ footer {
     margin-right: 15px;
     vertical-align: middle;
 }
+/* Historical Reports Section */
+#historical-reports {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#historical-reports ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#historical-reports li {
+    margin: 10px 0;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+}
+
+/* Monthly Tracker Section */
+#monthly-tracker {
+    margin-top: 20px;
+}
+
+#monthly-tracker ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#monthly-tracker li {
+    margin: 8px 0;
+    color: #ff8fb1;
+    font-size: 1rem;
+}
