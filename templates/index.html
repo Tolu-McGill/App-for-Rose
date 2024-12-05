@@ -57,6 +57,15 @@
             <h2>View Historical Reports</h2>
             <a href="{{ url_for('history') }}" class="button">View Previous Reports</a>
         </section>
+
+        <section id="monthly-tracker">
+            <h2>Entries This Month</h2>
+            <ul>
+                {% for entry in current_entries %}
+                <li>{{ entry[0] }} - ${{ entry[1] }} - {{ entry[2] }}</li>
+                {% endfor %}
+            </ul>
+        </section>
     </main>
     <footer>
         <p>Designed for Uloma with ❤️</p>
