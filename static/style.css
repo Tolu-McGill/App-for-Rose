@@ -192,3 +192,13 @@ footer {
         font-size: 0.9rem; /* Slightly smaller text */
     }
 }
+/* Grid Layout for Main Content */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
