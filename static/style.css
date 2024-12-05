@@ -170,7 +170,7 @@ footer {
     }
 
     .card {
-        width: 100%; /* Full width for smaller screens */
+        width: 80%; /* Full width for smaller screens */
     }
 
     header h1 {
