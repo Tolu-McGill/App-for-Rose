@@ -95,7 +95,7 @@ label {
 
 input[type="number"],
 select {
-    width: 100%;
+    width: 90%;
     padding: 12px;
     border: 1px solid #d4af37; /* Gold */
     border-radius: 8px;
