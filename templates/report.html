@@ -11,7 +11,11 @@
 
     <header>
         <h1>Expense Report for {{ month }}</h1>
+        {% if is_historical %}
         <a href="{{ url_for('history') }}">Back to History</a>
+        {% else %}
+        <a href="{{ url_for('index') }}">Back to Home</a>
+        {% endif %}
     </header>
 
     <main>

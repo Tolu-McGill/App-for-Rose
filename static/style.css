@@ -179,7 +179,7 @@ footer {
 
     input[type="number"],
     select {
-        width: 100%; /* Full width for inputs */
+        width: 80%; /* Full width for inputs */
     }
 
     #expenseChart {

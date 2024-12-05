@@ -106,7 +106,8 @@ def report():
     expenses_by_category = {category: amount for category, amount in expenses}
     total_spent = sum(expenses_by_category.values())
 
-    return render_template('report.html', expenses_by_category=expenses_by_category, total_spent=total_spent)
+    # Pass is_historical=False for the current month
+    return render_template('report.html', expenses_by_category=expenses_by_category, total_spent=total_spent, month="Current Month", is_historical=False)
 
 # Route to show history of reports
 @app.route('/history')
@@ -151,11 +152,13 @@ def report_by_month(month):
     expenses_by_category = {category: amount for category, amount in expenses}
     total_spent = sum(expenses_by_category.values())
 
+    # Pass is_historical=True for historical reports
     return render_template(
         'report.html', 
         expenses_by_category=expenses_by_category, 
         total_spent=total_spent, 
-        month=month
+        month=month,
+        is_historical=True
     )
 
 if __name__ == '__main__':
