@@ -28,19 +28,24 @@ main {
     max-width: 900px; /* Increased width for better layout */
     padding: 20px;
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Center content horizontally */
+    flex-wrap: wrap; /* Arrange sections in rows if screen is wide */
     gap: 20px;
+    justify-content: center;
 }
 
-/* Card Styling */
+/* New Card Styling for Sections */
 .card {
     background-color: #2b2b3f; /* Slightly lighter than the main background */
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    width: 100%; /* Use full width for better alignment */
+    width: calc(45% - 20px); /* Two cards per row with spacing */
     text-align: center;
+}
+
+/* For Full-Width Sections */
+.card.full-width {
+    width: 100%;
 }
 
 /* Button Styling */
@@ -61,23 +66,47 @@ main {
     color: #1e1e2f;
 }
 
+/* Form Styling */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ff8fb1; /* Soft pink */
+}
+
+input[type="number"],
+select {
+    max-width: 300px; /* Adjusted width for better aesthetics */
+    margin: 0 auto; /* Center-align input fields */
+    padding: 12px;
+    border: 1px solid #d4af37; /* Gold */
+    border-radius: 8px;
+    background-color: #1e1e2f;
+    color: #e0e0e0;
+    transition: border-color 0.3s ease;
+}
+
+input[type="number"]:focus,
+select:focus {
+    border-color: #a96dbb; /* Purple focus color */
+}
+
 /* Table Styling */
 #expense-breakdown {
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Center table content */
+    justify-content: center; /* Center table */
     margin-top: 20px;
-}
-
-#expense-breakdown h2 {
-    margin-bottom: 15px; /* Add spacing between heading and table */
 }
 
 #expense-breakdown table {
     width: 80%; /* Reduced width for better layout */
     border-collapse: collapse;
     font-size: 1rem;
-    margin: 0 auto; /* Center the table */
 }
 
 #expense-breakdown th,
@@ -100,14 +129,14 @@ main {
 #chart-section {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the chart */
+    align-items: center; /* Center chart */
     margin-top: 30px;
 }
 
 #expenseChart {
-    max-width: 700px; /* Increased size for better visibility */
+    max-width: 5000px; /* Larger chart for better visibility */
     height: auto;
-    margin: 0 auto; /* Center the chart */
+    margin: 0 auto;
     display: block;
 }
 
