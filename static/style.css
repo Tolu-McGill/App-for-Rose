@@ -134,7 +134,7 @@ select:focus {
 }
 
 #expenseChart {
-    max-width: 700px; /* Larger chart for better visibility */
+    max-width: 1000px; /* Larger chart for better visibility */
     height: auto;
     margin: 0 auto;
     display: block;
