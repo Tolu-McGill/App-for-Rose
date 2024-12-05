@@ -58,22 +58,29 @@
                     label: 'Expenses by Category',
                     data: [{% for amount in expenses_by_category.values() %}{{ amount }}, {% endfor %}],
                     backgroundColor: [
-                        '#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#33FFF1', '#F1FF33', '#9A33FF', '#FF9A33', '#33FF9A', '#5733FF',
-                        '#FF3357', '#A1FF33', '#33A1FF', '#FF5733', '#33FFCC', '#FF33CC', '#FFCC33', '#33CCFF', '#CC33FF', '#FF3366'
+                        '#FF6F61', '#6B5B95', '#88B04B', '#F7CAC9', '#92A8D1', '#955251', '#B565A7', '#009B77', '#DD4124', '#45B8AC',
+                        '#EFC050', '#5B5EA6', '#9B2335', '#DFCFBE', '#BC243C', '#C3447A', '#98B4D4', '#D65076', '#7FCDCD', '#FFD662'
                     ],
-                    hoverOffset: 4
+                    hoverOffset: 6
                 }]
             },
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'bottom'
+                        position: 'bottom',
+                        labels: {
+                            color: '#e0e0e0', // Matches the site's light font
+                            font: {
+                                size: 14
+                            }
+                        }
                     }
                 }
             }
         });
     </script>
+    
     
 <footer>
     <p>Designed for Uloma with ❤️</p>
