@@ -25,7 +25,7 @@ header h1 {
 /* Main Container */
 main {
     margin: 20px auto;
-    max-width: 900px;
+    max-width: 900px; /* Increased width for desktop */
     padding: 20px;
     display: flex;
     flex-wrap: wrap; /* Arrange sections in rows */
@@ -39,7 +39,7 @@ main {
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    width: calc(45% - 20px); /* Two cards per row with spacing */
+    width: calc(45% - 20px); /* Two cards per row on desktop */
     text-align: center;
 }
 
@@ -51,12 +51,12 @@ main {
 /* Responsive Styling for Mobile */
 @media screen and (max-width: 768px) {
     main {
-        flex-direction: column;
+        flex-direction: column; /* Stack cards vertically */
         gap: 15px;
     }
 
     .card {
-        width: 100%; /* Full width for all cards */
+        width: 100%; /* Full width for cards */
     }
 
     header h1 {
@@ -69,14 +69,57 @@ main {
     }
 
     #expenseChart {
-        max-width: 100%; /* Ensure chart fits smaller screens */
+        max-width: 90%; /* Chart adapts to screen width */
         height: auto; /* Adjust height automatically */
     }
 
     #expense-breakdown table {
         width: 100%; /* Table spans full width */
-        font-size: 0.9rem; /* Reduce font size slightly */
+        font-size: 0.9rem; /* Slightly smaller text */
     }
+}
+
+/* Table Styling */
+#expense-breakdown {
+    display: flex;
+    justify-content: center; /* Center table */
+    margin-top: 20px;
+}
+
+#expense-breakdown table {
+    width: 80%; /* Adjust width for better layout */
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+#expense-breakdown th,
+#expense-breakdown td {
+    padding: 12px;
+    text-align: center; /* Center-align content */
+    border-bottom: 1px solid #5a1d5e; /* Dark purple border */
+}
+
+#expense-breakdown th {
+    background-color: #d4af37; /* Gold */
+    color: #1e1e2f; /* Dark text */
+}
+
+#expense-breakdown tr:nth-child(even) {
+    background-color: #2b2b3f; /* Darker row background */
+}
+
+/* Chart Section */
+#chart-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center chart */
+    margin-top: 30px;
+}
+
+#expenseChart {
+    max-width: 600px; /* Larger for desktop, auto-adjust for mobile */
+    width: 90%; /* Flexible width for all devices */
+    height: 400px; /* Consistent height */
 }
 
 /* Footer Styling */
@@ -87,4 +130,12 @@ footer {
     padding: 10px;
     font-size: 0.9rem;
     box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo Styling */
+.logo {
+    width: 60px; /* Adjust as needed */
+    height: auto;
+    margin-right: 15px;
+    vertical-align: middle;
 }
