@@ -41,21 +41,33 @@ def init_db():
     cursor.close()
     conn.close()
 
-# Index route with monthly total spending calculation
+# Modified Index Route to Include Current Month Entries
 @app.route('/')
 def index():
     conn = get_db_connection()
     cursor = conn.cursor()
+    
+    # Total spending for the month
     cursor.execute('''
         SELECT SUM(amount) 
         FROM expenses 
         WHERE date_trunc('month', date::date) = date_trunc('month', CURRENT_DATE)
     ''')
     total_spent = cursor.fetchone()[0]
+
+    # Entries for the current month
+    cursor.execute('''
+        SELECT date, amount, category 
+        FROM expenses 
+        WHERE date_trunc('month', date::date) = date_trunc('month', CURRENT_DATE)
+        ORDER BY date DESC
+    ''')
+    current_entries = cursor.fetchall()
+
     cursor.close()
     conn.close()
     total_spent = total_spent if total_spent else 0.0
-    return render_template('index.html', total_spent=total_spent)
+    return render_template('index.html', total_spent=total_spent, current_entries=current_entries)
 
 # Route to add a new expense
 @app.route('/add_expense', methods=['POST'])
@@ -95,6 +107,25 @@ def report():
     total_spent = sum(expenses_by_category.values())
 
     return render_template('report.html', expenses_by_category=expenses_by_category, total_spent=total_spent)
+
+# Route to show history of reports
+@app.route('/history')
+def history():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT DISTINCT date_trunc('month', date::date) AS month, SUM(amount)
+        FROM expenses
+        GROUP BY date_trunc('month', date::date)
+        ORDER BY month DESC
+    ''')
+    reports = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    # Process the reports into a dictionary format for display
+    historical_reports = {row[0].strftime('%B %Y'): row[1] for row in reports}
+    return render_template('history.html', historical_reports=historical_reports)
 
 if __name__ == '__main__':
     init_db()
