@@ -81,7 +81,8 @@ label {
 
 input[type="number"],
 select {
-    width: 100%;
+    max-width: 300px; /* Adjusted width for better aesthetics */
+    margin: 0 auto; /* Center-align input fields */
     padding: 12px;
     border: 1px solid #d4af37; /* Gold */
     border-radius: 8px;
@@ -95,31 +96,48 @@ select:focus {
     border-color: #a96dbb; /* Purple focus color */
 }
 
-/* Monthly Tracker Section */
-#monthly-tracker ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-#monthly-tracker li {
-    margin: 8px 0;
-    color: #ff8fb1;
+/* Table Styling */
+#expense-breakdown table {
+    width: 100%;
+    border-collapse: collapse;
     font-size: 1rem;
-    text-align: left;
+    margin-top: 20px;
 }
 
-/* Historical Reports Section */
-#historical-reports ul {
-    list-style-type: none;
-    padding: 0;
+#expense-breakdown th,
+#expense-breakdown td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #5a1d5e; /* Dark purple border */
 }
 
-#historical-reports li {
-    margin: 10px 0;
-    color: #e0e0e0;
-    font-size: 1.1rem;
-    text-align: left;
+#expense-breakdown th {
+    background-color: #d4af37; /* Gold */
+    color: #1e1e2f; /* Dark text */
+    text-align: center; /* Center-align headers */
+}
+
+#expense-breakdown tr:nth-child(even) {
+    background-color: #2b2b3f; /* Darker row background */
+}
+
+#expense-breakdown td {
+    text-align: center; /* Center-align data cells */
+}
+
+/* Chart Section */
+#chart-section h2 {
+    color: #ff8fb1; /* Soft pink */
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 30px;
+}
+
+#expenseChart {
+    max-width: 500px; /* Larger chart for better visibility */
+    height: auto;
+    margin: 0 auto; /* Center the chart */
+    display: block; /* Ensure proper alignment */
 }
 
 /* Footer Styling */
@@ -138,4 +156,31 @@ footer {
     height: auto;
     margin-right: 15px;
     vertical-align: middle;
+}
+
+/* Historical Reports Section */
+#historical-reports ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#historical-reports li {
+    margin: 10px 0;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+/* Monthly Tracker Section */
+#monthly-tracker ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#monthly-tracker li {
+    margin: 8px 0;
+    color: #ff8fb1;
+    font-size: 1rem;
+    text-align: left;
 }
